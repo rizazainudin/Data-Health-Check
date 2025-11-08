@@ -48,13 +48,11 @@ The flow is triggered when a new email arrives in Outlook with the following pro
 2. Run Power BI Dataset Query: A query is executed against the Power BI dataset to extract the non-mapped data.
 3. Create a CSV Table: Save the data in the form of CSV
 4. Send an email: An automated email is sent to the IBP team.\
-    Includes:
+   Includes:
     - Snapshot image of the report (Summary of data health status)
     - CSV file with mapping breakdown
 
-</br>
-Compose Steps for Execution
-
+**Compose Steps for Execution**
 | Step Name | Purpose | Expression |
 | --- | --- | --- |
 | Compose Date | Generate timestamp and append it to the file name | `convertFromUtc(utcNow(), 'Singapore Standard Time', 'yyyyMMddhhmm')` |
