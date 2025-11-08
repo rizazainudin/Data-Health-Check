@@ -1,13 +1,13 @@
 # Data Health Check
-Automates weekly Data Health Check by extracting mapping data from Dataverse, extracting visuals from PBI, storing in SharePoint, and emailing stakeholders to reduce manual effort and improve accuracy.
+This project automates the monthly data health reporting process for Channel Mapping and Product Mapping, which are essential components of the sales reporting pipeline. Without proper mapping, sales insights are incomplete and potentially misleading.
 
 ## Overview
 **Business Problem**:
-Business users need monthly visibility into the completeness of channel and product mapping. The underlying data for mapped and unmapped product and channel mappings is stored in Dataverse.
-Previously, this process required:
-- Manual extraction of data from Dataverse via CSV export.
-- IT BRM manually analyzing unmapped items and creating a summary using pivot tables.
-- Consolidating each country’s unmapped rows into different Excel tabs.
+The manual process of extracting mapping data, analyzing it, and reporting to stakeholders was time-consuming and prone to human error. It also lacked consistency and scalability as data volume grew.
+Previously, the data health check was performed manually:
+1. Data Extraction: Export mapping data from Dataverse.
+2. Data Processing: Create a pivot table to summarize the number of NonMapped entries by Country Code (ID, MY, PH, SG, TH, VN).
+3. Reporting: Email the IBP team with a summary and attach the processed file.
 
 This manual process was time-consuming, prone to delays, and introduced:
 - Operational overhead due to repetitive tasks.
@@ -15,6 +15,20 @@ This manual process was time-consuming, prone to delays, and introduced:
 - Lack of timely updates for stakeholders.
 
 ## Objectives
-- Reduce manual effort by automating data retrieval and reporting.
-- Improve accuracy by eliminating manual consolidation and pivoting.
-- Speed up the process by delivering insights automatically on a fixed schedule.
+
+| Main Point | Explanation |
+| --- | --- |
+| Reduce Manual Effort | Automate repetitive tasks like data extraction, pivoting, and emailing. |
+| Improve Accuracy | Minimize human error in data handling and reporting. |
+| Increase Frequency & Visibility | Move from monthly to weekly updates for better monitoring. |
+| Speed Up the Process | Deliver insights faster to stakeholders for timely decision-making. |
+
+## Tools & Technologies Used
+
+| Tool / Technology | Purpose |
+| --- | --- |
+| Power Automate | Orchestrates the entire workflow, including email triggers and actions. |
+| Power BI Service | Hosts the Data Health Report and sends weekly snapshots via subscription. |
+| Dataverse | Source of Channel and Product Mapping data. |
+| SharePoint Folder | Storage for snapshots and CSV files. |
+| Outlook Email | Sends automated summary reports to the IBP team. |
