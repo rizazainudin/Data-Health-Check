@@ -47,10 +47,18 @@ The flow is triggered when a new email arrives in Outlook with the following pro
 1. Save Snapshot to SharePoint: The email attachment (report snapshot) is saved to a designated folder in SharePoint for archival and reference.
 2. Run Power BI Dataset Query: A query is executed against the Power BI dataset to extract the non-mapped data.
 3. Create a CSV Table: Save the data in the form of CSV
-4. Send an email: An automated email is sent to the IBP team.
-  Includes:
-  📎 Snapshot image of the report (Summary of data health status)
-  📎 CSV file with mapping breakdown
+4. Send an email: An automated email is sent to the IBP team.\
+    Includes:
+    - Snapshot image of the report (Summary of data health status)
+    - CSV file with mapping breakdown
 
+</br>
+Compose Steps for Execution
 
-base64ToBinary(items('Apply_to_each')?['contentBytes'])
+| Step Name | Purpose | Expression |
+| --- | --- | --- |
+| Compose Date | Generate timestamp and append it to the file name | `convertFromUtc(utcNow(), 'Singapore Standard Time', 'yyyyMMddhhmm')` |
+| Compose File Format | Extract the actual file format from the attachment name | `substring(items('Apply_to_each')?['name'], lastIndexOf(items('Apply_to_each')?['name'], '.'))` |
+| Compose File Content | Convert file content from Base64 to binary before saving in SharePoint | `base64ToBinary(items('Apply_to_each')?['contentBytes'])` |
+| Compose Snapshot PNG | Convert file to URI for embedding in HTML email body | `dataUri(body('Get_file_content_using_path'))` | 
+
