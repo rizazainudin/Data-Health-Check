@@ -14,7 +14,7 @@ This manual process was time-consuming, prone to delays, and introduced:
 - Risk of human error in preparing and attaching the correct visual.
 - Lack of timely updates for stakeholders.
 
---
+---
 
 ## Objectives
 - Reduce manual effort by automating data retrieval and reporting.
