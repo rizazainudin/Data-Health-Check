@@ -39,9 +39,9 @@ The new automated workflow leverages **Power BI Service** (Report Subscription) 
 ### 🟢 Trigger
 The flow is triggered when a new email arrives in Outlook with the following properties:
 
-- Subject: Weekly Data Health Check
-- From: no-reply.powerbi@microsoft.com
-- Has Attachment: Yes (Power BI report snapshot)
+- Subject: [EXTERNAL] Data Health Check (Daily Update)
+- From: no-reply-powerbi@microsoft.com
+- Include Attachments: Yes (Power BI report snapshot)
 
 ### ⚙️ Actions
 1. Save Snapshot to SharePoint: The email attachment (report snapshot) is saved to a designated folder in SharePoint for archival and reference.
@@ -51,3 +51,6 @@ The flow is triggered when a new email arrives in Outlook with the following pro
   Includes:
   📎 Snapshot image of the report (Summary of data health status)
   📎 CSV file with mapping breakdown
+
+
+base64ToBinary(items('Apply_to_each')?['contentBytes'])
