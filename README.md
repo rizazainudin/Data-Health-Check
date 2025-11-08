@@ -18,10 +18,10 @@ This manual process was time-consuming, prone to delays, and introduced:
 
 | Main Point | Explanation |
 | --- | --- |
-| Reduce Manual Effort | Automate repetitive tasks like data extraction, pivoting, and emailing. |
-| Improve Accuracy | Minimize human error in data handling and reporting. |
-| Increase Frequency & Visibility | Move from monthly to weekly updates for better monitoring. |
-| Speed Up the Process | Deliver insights faster to stakeholders for timely decision-making. |
+| Reduce manual effort | Automate repetitive tasks like data extraction, pivoting, and emailing. |
+| Improve accuracy | Minimize human error in data handling and reporting. |
+| Increase frequency & visibility | Move from monthly to weekly updates for better monitoring. |
+| Speed up the process | Deliver insights faster to stakeholders for timely decision-making. |
 
 ## Tools & Technologies Used
 
@@ -32,3 +32,22 @@ This manual process was time-consuming, prone to delays, and introduced:
 | Dataverse | Source of Channel and Product Mapping data. |
 | SharePoint Folder | Storage for snapshots and CSV files. |
 | Outlook Email | Sends automated summary reports to the IBP team. |
+
+## Workflow (Post-Automation)
+The new automated workflow leverages **Power BI Service** (Report Subscription) and **Power Automate** to streamline the process:
+
+### 🟢 Trigger
+The flow is triggered when a new email arrives in Outlook with the following properties:
+
+- Subject: Weekly Data Health Check
+- From: no-reply.powerbi@microsoft.com
+- Has Attachment: Yes (Power BI report snapshot)
+
+### ⚙️ Actions
+1. Save Snapshot to SharePoint: The email attachment (report snapshot) is saved to a designated folder in SharePoint for archival and reference.
+2. Run Power BI Dataset Query: A query is executed against the Power BI dataset to extract the non-mapped data.
+3. Create a CSV Table: Save the data in the form of CSV
+4. Send an email: An automated email is sent to the IBP team.
+  Includes:
+  📎 Snapshot image of the report (Summary of data health status)
+  📎 CSV file with mapping breakdown
