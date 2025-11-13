@@ -195,3 +195,8 @@ The email is automatically sent to the business team every Monday, ensuring time
 2. Consistent and timely updates every Monday.
 3. Centralized storage of historical snapshots in SharePoint.
 
+## Screenshots
+
+Email to stakeholders/business team:
+![Outlook_Email](https://github.com/rizazainudin/Data-Health-Check/blob/main/2_EmailSnapshot.png)
+
