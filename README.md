@@ -93,6 +93,8 @@ The flow is triggered when a new email arrives in Outlook with the following pro
 
 **Power BI Queries Used in the Flow**
 1. ***Non-Mapped Data Extraction***
+
+
 This query retrieves all non-mapped entries for a specific country:
 ```DAX
 DEFINE
@@ -129,6 +131,8 @@ ORDER BY
 ```
 
 2. ***Summary Data***
+
+
 This query summarizes unmapped counts for both Product and Customer mapping by country:
 ```DAX
 DEFINE
@@ -148,6 +152,8 @@ EVALUATE
 ```
 
 **HTML Table Styling for Email**
+
+
 Here’s the CSS used to style the summary table in the email body:
 ```CSS
 <style>
@@ -175,4 +181,17 @@ table thead th {
 ```
 
 
+### How It All Comes Together
+Once both branches complete their tasks, the flow merges the outputs into a single, well-formatted email. This email provides:
+1. A visual snapshot of mapping completeness for quick insights.
+2. A summary table of non-mapped data for validation.
+3. Detailed CSV files for each country for deeper analysis.
+
+The email is automatically sent to the business team every Monday, ensuring timely and accurate updates without manual intervention.
+
+## Results & Impact
+
+1. Zero manual intervention for weekly reporting.
+2. Consistent and timely updates every Monday.
+3. Centralized storage of historical snapshots in SharePoint.
 
