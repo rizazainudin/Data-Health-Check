@@ -1,7 +1,21 @@
 # Data Health Check
-This automation ensures timely distribution of the Data Health Check snapshot to the business team every Monday. It leverages Power BI subscription emails as the trigger and eliminates manual steps in saving and sharing the report.
+This automation delivers the Data Health Check snapshot to the IBP team every Monday, using Power BI subscription emails as the trigger and removing every manual step in saving and sharing the report.
 
-This data health is an essential component of the sales reporting pipeline. Without proper mapping, sales insights are incomplete and potentially misleading.
+The data health check is an essential part of the sales reporting pipeline: without complete channel and product mapping, sales insights are incomplete and potentially misleading.
+
+## Table of Contents
+- [Overview](#overview)
+- [Objectives](#objectives)
+- [Tools & Technologies Used](#tools--technologies-used)
+- [Flow Structure](#flow-structure)
+  - [Trigger](#trigger)
+  - [Actions](#actions)
+  - [Expressions Used in the Flow](#expressions-used-in-the-flow)
+  - [Power BI Queries Used in the Flow](#power-bi-queries-used-in-the-flow)
+  - [HTML Table Styling for Email](#html-table-styling-for-email)
+  - [How It All Comes Together](#how-it-all-comes-together)
+- [Results & Impact](#results--impact)
+- [Screenshots](#screenshots)
 
 ## Overview
 **Business Problem**:
@@ -9,7 +23,7 @@ The manual process of extracting mapping data, analyzing it, and reporting to st
 Previously, the data health check was performed manually:
 1. Data Extraction: Export mapping data from Dataverse.
 2. Data Processing: Create a pivot table to summarize the number of non-mapped entries by country (ID, MY, PH, SG, TH, VN).
-3. Reporting: Email the business team with a summary and attach the processed file.
+3. Reporting: Email the IBP team with a summary and attach the processed file.
 
 This manual process was time-consuming, prone to delays, and introduced:
 - Operational overhead due to repetitive tasks.
@@ -38,7 +52,7 @@ This manual process was time-consuming, prone to delays, and introduced:
 ## Flow Structure
 The new automated workflow leverages **Power BI Service** (Report Subscription) and **Power Automate** to streamline the process:
 
-![Flow Overview](https://github.com/rizazainudin/Data-Health-Check/blob/main/1_Flow_Structure.png)
+![Flow Overview](1_Flow_Structure.png)
 
 ### Trigger
 The flow is triggered when a new email arrives in Outlook with the following properties:
@@ -77,12 +91,12 @@ The flow is triggered when a new email arrives in Outlook with the following pro
 - Compose Table CSS Styling
 - Compose Message (email body)
 - Compose Attachment (CSV files for each country)
-- Send an email (V2) to Business Team:
+- Send an email (V2) to the IBP team:
    - Includes snapshot image
    - Includes summary table
    - Includes CSV attachments
 
-**Expressions Used in the Flow**
+### Expressions Used in the Flow
 | Step Name | Purpose | Expression |
 | --- | --- | --- |
 | Append to array variable (attachment) | Generate attachment array for Outlook Email | `{"Name": "@{items('Apply_to_each_country')}_ChannelMapping.csv","ContentBytes": @{body('Create_CSV_table_Channel')}}`|
@@ -91,7 +105,7 @@ The flow is triggered when a new email arrives in Outlook with the following pro
 | Compose File Content | Convert file content from Base64 to binary before saving in SharePoint | `base64ToBinary(items('Apply_to_each')?['contentBytes'])` |
 | Compose Snapshot PNG | Convert file to URI for embedding in HTML email body | `dataUri(body('Get_file_content_using_path'))` | 
 
-**Power BI Queries Used in the Flow**
+### Power BI Queries Used in the Flow
 1. ***Non-Mapped Data Extraction***
 
 
@@ -151,10 +165,8 @@ EVALUATE
     __DS0Core
 ```
 
-**HTML Table Styling for Email**
-
-
-Here’s the CSS used to style the summary table in the email body:
+### HTML Table Styling for Email
+Here’s the CSS used to style the summary table in the email body. The full email body template is available in [`Email HTML Format.html`](Email%20HTML%20Format.html).
 ```CSS
 <style>
 table {
@@ -187,7 +199,7 @@ Once both branches complete their tasks, the flow merges the outputs into a sing
 2. A summary table of non-mapped data for validation.
 3. Detailed CSV files for each country for deeper analysis.
 
-The email is automatically sent to the business team every Monday, ensuring timely and accurate updates without manual intervention.
+The email is automatically sent to the IBP team every Monday, ensuring timely and accurate updates without manual intervention.
 
 ## Results & Impact
 
@@ -197,6 +209,6 @@ The email is automatically sent to the business team every Monday, ensuring time
 
 ## Screenshots
 
-Email to stakeholders/business team:
-![Outlook_Email](https://github.com/rizazainudin/Data-Health-Check/blob/main/2_EmailSnapshot.png)
+Email delivered to the IBP team:
+![Outlook Email](2_EmailSnapshot.png)
 
